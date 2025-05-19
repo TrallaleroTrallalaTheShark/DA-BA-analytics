@@ -1,0 +1,8 @@
+streamlit
+pandas
+os
+json
+matplotlib.pyplot
+seaborn
+plotly.express
+Counter
