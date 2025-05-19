@@ -24,7 +24,7 @@ st.set_page_config(
 
 # --- Tên file CSV chứa dữ liệu tổng hợp đã làm sạch ---
 # File này sẽ nằm trong repository GitHub của bạn, cùng cấp với dashboard_app.py
-DATA_CSV_PATH = "E:/DỰ_ÁN/data_cleaned.csv" 
+DATA_CSV_PATH = "E:/DỰ_ÁN/DA-BA-analytics/data_cleaned.csv" 
 
 # --- Hàm Tải Dữ Liệu từ CSV (có cache) ---
 @st.cache_data # Cache dữ liệu để không phải tải lại mỗi lần tương tác
