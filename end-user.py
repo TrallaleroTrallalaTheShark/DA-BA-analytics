@@ -1,7 +1,7 @@
 # my_dashboard_app_enhanced.py
 import streamlit as st
 import pandas as pd
-import sqlite3
+# import sqlite3 # Không cần thiết khi đọc từ CSV đã xử lý
 import os
 import json
 import matplotlib.pyplot as plt 
@@ -86,41 +86,88 @@ def load_custom_css():
             42% { color: #00ff00; } 57% { color: #0000ff; } 71% { color: #4b0082; }
             85% { color: #8b00ff; } 100% { color: #ff0000; }
         }
-        /* Tiêu đề chính của ứng dụng */
-        .main-title { /* Thêm một class cho tiêu đề chính nếu bạn dùng st.markdown */
+        /* Tiêu đề chính của ứng dụng (st.title) */
+        div[data-testid="stAppViewContainer"] > .main > div > div > div > h1 {
             text-align: center; font-family: 'Arial Black', Gadget, sans-serif;
-            font-size: 2.5em; animation: rainbowText 10s infinite linear;
+            font-size: 2.8em; /* Tăng kích thước một chút */
+            animation: rainbowText 8s infinite linear; /* Tăng tốc độ animation */
             background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff0000);
             -webkit-background-clip: text; background-clip: text; color: transparent;
+            padding-bottom: 10px; /* Thêm chút padding dưới cho tiêu đề */
+            margin-bottom: 20px; /* Khoảng cách với nội dung bên dưới */
         }
-        /* CSS cho các thẻ h1, h2, h3 mặc định của Streamlit nếu bạn dùng st.title, st.header, st.subheader */
-        div[data-testid="stAppViewContainer"] > .main > div > div > div > h1 { /* Target h1 của st.title() */
-            text-align: center; font-family: 'Arial Black', Gadget, sans-serif;
-            font-size: 2.5em; animation: rainbowText 10s infinite linear;
-            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff0000);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        h2 { /* Tiêu đề các phần (st.header) */
-            color: #2980b9; 
+        /* Tiêu đề các phần (st.header - h2) */
+        h2 { 
+            color: #2980b9 !important; /* Màu xanh dương mặc định, !important để ưu tiên */
             border-bottom: 2px solid #2980b9;
             padding-bottom: 5px; margin-top: 40px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font hiện đại hơn */
         }
-        h3 { /* Tiêu đề nhỏ hơn (st.subheader) */
-            color: #34495e; margin-top: 30px; 
+        /* Tiêu đề nhỏ hơn (st.subheader - h3) */
+        h3 { 
+            color: #34495e !important; /* Màu xám đậm mặc định, !important */
+            margin-top: 30px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        /* CSS cho header "Tổng Quan Dữ Liệu (Sau lọc)" cụ thể */
-        .custom-header-color {
-            color: black !important; /* Đảm bảo màu đen được ưu tiên */
-        }
-
-        div[data-testid="stSidebar"] > div:first-child {
+        
+        /* Sidebar */
+        div[data-testid="stSidebar"] > div:first-child { /* Target sidebar tổng quát hơn */
             background-color: #f8f9fa; 
         }
-        .stButton>button { border-radius: 20px; border: 1px solid #2980b9; color: #2980b9; transition: all 0.3s ease; }
-        .stButton>button:hover { background-color: #2980b9; color: white; border-color: #2980b9;}
-        .stMetric { background-color: #ffffff; border-left: 5px solid #1abc9c; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease-in-out; }
-        .stMetric:hover { transform: translateY(-3px); }
+        /* Nút bấm */
+        .stButton>button { 
+            border-radius: 25px; /* Bo tròn hơn nữa */
+            border: 2px solid #3498db; /* Màu border mới */
+            color: #3498db;
+            font-weight: bold;
+            padding: 8px 18px; /* Tăng padding */
+            transition: all 0.3s ease-in-out; 
+        }
+        .stButton>button:hover { 
+            background-color: #3498db; 
+            color: white; 
+            border-color: #2980b9;
+            transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+        }
+        /* Metric cards */
+        .stMetric { 
+            background-color: #ffffff; 
+            border-left: 7px solid #1abc9c; /* Đường kẻ trái dày hơn */
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12); 
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
+        }
+        .stMetric:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        /* SỬA MÀU TEXT BÊN TRONG METRIC */
+        div[data-testid="stMetric"] label { /* Label của metric (ví dụ: "Tổng số Tin Tuyển Dụng") */
+            color: #555555 !important; /* Màu xám đậm cho label */
+            font-weight: 500;
+        }
+        div[data-testid="stMetric"] div[data-testid="stMetricValue"] { /* Giá trị của metric */
+            color: #2c3e50 !important; /* Màu đen/xanh đậm cho giá trị */
+            font-size: 2em !important; /* Có thể tăng kích thước giá trị */
+            font-weight: bold;
+        }
+        div[data-testid="stMetric"] div[data-testid="stMetricDelta"] { /* Giá trị delta (nếu có) */
+            color: #7f8c8d !important; 
+        }
+
         .stDataFrame { border-radius: 8px; overflow: hidden; }
+        
+        /* Thêm style cho các tab */
+        div[data-testid="stTabs"] button[role="tab"] {
+            font-weight: 500;
+            border-radius: 8px 8px 0 0;
+            margin-right: 4px;
+        }
+        div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+            background-color: #e0e0e0; /* Màu nền cho tab đang active */
+        }
+
     </style>
     """, unsafe_allow_html=True)
 
@@ -130,8 +177,8 @@ df_master, error_message = load_data_from_csv(DATA_CSV_FILENAME)
 # --- Xây dựng Giao diện Streamlit ---
 load_custom_css() 
 
-st.title("🚀 Dashboard Phân Tích Thị Trường Việc Làm DA/BA") # Sẽ được style bởi CSS cho h1
-st.markdown("Khám phá các xu hướng tuyển dụng mới nhất cho ngành Phân Tích Dữ liệu và Phân Tích Kinh doanh tại Việt Nam.")
+st.title("🚀 Dashboard Phân Tích Thị Trường Việc Làm DA/BA")
+st.markdown("Khám phá các xu hướng tuyển dụng mới nhất cho ngành Phân tích Dữ liệu và Phân tích Kinh doanh tại Việt Nam.")
 st.markdown("---")
 
 if error_message: 
@@ -143,10 +190,9 @@ else:
         df_master['job_role_group'] = df_master['job_title'].apply(categorize_job_role_st)
 
     # --- Sidebar cho Bộ lọc ---
-    # SỬA use_column_width thành use_container_width
-    st.sidebar.image("https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80", caption="Data Analytics", use_container_width=True) 
+    st.sidebar.image("https://i.ibb.co/QFf2sWDS/Screenshot-2025-05-19-235529.png", caption="Data Analytics", use_container_width=True) 
     st.sidebar.header("Bộ lọc Dữ liệu 🛠️")
-    # ... (Phần còn lại của sidebar giữ nguyên)
+    # ... (Phần sidebar giữ nguyên) ...
     source_options = ["Tất cả"] + sorted(df_master['source_website'].unique().tolist()) if 'source_website' in df_master.columns else ["Tất cả"]
     selected_source = st.sidebar.selectbox("Nguồn Website:", source_options, help="Chọn nguồn dữ liệu bạn muốn xem.")
     location_options = ["Tất cả"] + sorted(df_master['location_primary'].dropna().unique().tolist()) if 'location_primary' in df_master.columns else ["Tất cả"]
@@ -170,13 +216,13 @@ else:
         df_filtered = df_filtered[(df_filtered['experience_years_min_numeric'] >= selected_exp_range[0]) & (df_filtered['experience_years_min_numeric'] <= selected_exp_range[1])]
     
     # --- Hiển thị Thông tin Tổng quan ---
-    # SỬA MÀU TEXT CHO HEADER NÀY
-    st.markdown("<h2 class='custom-header-color'>📈 Tổng Quan Dữ Liệu (Sau lọc)</h2>", unsafe_allow_html=True)
+    # Sử dụng st.header() mặc định, nó sẽ lấy style từ CSS cho h2
+    st.header("📈 Tổng Quan Dữ Liệu (Sau lọc)") 
     
     if not df_filtered.empty:
-        # ... (Phần KPI và dữ liệu mẫu giữ nguyên) ...
         total_jobs_filtered = len(df_filtered)
         latest_update_time = "Không rõ"
+        # Giả sử file CSV được cập nhật bởi process_timestamp từ bảng master
         if 'process_timestamp' in df_filtered.columns and df_filtered['process_timestamp'].notna().any():
             try: latest_update_time = pd.to_datetime(df_filtered['process_timestamp'].max()).strftime('%H:%M:%S %d/%m/%Y')
             except: pass
@@ -193,11 +239,11 @@ else:
 
     # --- Các Tab Phân Tích ---
     if not df_filtered.empty:
-        st.markdown("<h2 class='custom-header-color'>💡 Insights Chi Tiết</h2>", unsafe_allow_html=True) # Có thể thêm class cho header này nếu muốn
+        st.header("💡 Insights Chi Tiết") # Sử dụng st.header() mặc định
         tab1, tab2, tab3, tab4 = st.tabs(["🌍 Địa Điểm & Vai Trò", "🛠️ Kinh Nghiệm & Kỹ Năng", "💰 Lương & Phúc Lợi", "📅 Xu Hướng Thời Gian"])
         
-        # ... (Nội dung các tab giữ nguyên như code trước, đảm bảo các lệnh st.pyplot và st.plotly_chart 
-        #      đã sử dụng use_container_width=True nếu có thể áp dụng)
+        # ... (Nội dung các tab giữ nguyên như code trước, 
+        #      đảm bảo st.pyplot và st.plotly_chart đã sử dụng use_container_width=True nếu có) ...
         with tab1:
             col_loc, col_role = st.columns(2)
             with col_loc:
@@ -231,7 +277,7 @@ else:
                             fig_exp.update_layout(title_x=0.5, font=dict(family="Arial, sans-serif")); st.plotly_chart(fig_exp, use_container_width=True)
             with col_exp_skill2:
                 if 'parsed_skills_or_tags' in df_filtered.columns:
-                    st.markdown("**Top 10 Kỹ năng/Tags phổ biến**", unsafe_allow_html=True) # Sử dụng markdown cho đậm
+                    st.markdown("**Top 10 Kỹ năng/Tags phổ biến**", unsafe_allow_html=True)
                     all_skills_tags_list_f = []; df_filtered['parsed_skills_or_tags'].dropna().apply(lambda skills_list: all_skills_tags_list_f.extend([skill.lower().strip() for skill in skills_list if skill.strip()]))
                     if all_skills_tags_list_f:
                         skill_tag_counts_f = pd.Series(all_skills_tags_list_f).value_counts().head(10)
@@ -276,6 +322,7 @@ else:
                 else: st.write("Không đủ dữ liệu ngày tháng để vẽ biểu đồ xu hướng.")
             else: st.write("Thiếu cột 'posted_year_month' để phân tích xu hướng.")
 
+    # --- Thông báo cuối trang ---
     st.markdown("---"); st.markdown("Dự án được thực hiện bởi Nhóm 6") 
     st.markdown(f"Dữ liệu được tổng hợp từ VietnamWorks và CareerViet, xử lý lần cuối vào: {latest_update_time if 'latest_update_time' in locals() and latest_update_time != 'Không rõ' else 'Chưa có thông tin'}")
 
