@@ -87,54 +87,49 @@ def load_custom_css():
             85% { color: #8b00ff; } 100% { color: #ff0000; }
         }
         /* Tiêu đề chính của ứng dụng (st.title) */
+        /* Để font Arial Black có hiệu lực tốt nhất, nó cần được cài đặt trên hệ thống người dùng 
+           hoặc bạn có thể nhúng font web nếu muốn đảm bảo tính nhất quán tuyệt đối.
+           Một số font đậm khác bạn có thể thử (cần import nếu là webfont): 
+           'Impact', 'Bungee', 'Anton', 'Passion One' 
+        */
         div[data-testid="stAppViewContainer"] > .main > div > div > div > h1 {
-            text-align: center; font-family: 'Arial Black', Gadget, sans-serif;
-            font-size: 2.8em; /* Tăng kích thước một chút */
-            animation: rainbowText 8s infinite linear; /* Tăng tốc độ animation */
+            text-align: center; 
+            font-family: 'Arial Black', Gadget, sans-serif; /* Giữ Arial Black hoặc thử font khác */
+            font-size: 2.8em; 
+            animation: rainbowText 8s infinite linear; 
             background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff0000);
             -webkit-background-clip: text; background-clip: text; color: transparent;
-            padding-bottom: 10px; /* Thêm chút padding dưới cho tiêu đề */
-            margin-bottom: 20px; /* Khoảng cách với nội dung bên dưới */
+            padding-bottom: 10px; 
+            margin-bottom: 20px; 
         }
         /* Tiêu đề các phần (st.header - h2) */
         h2 { 
-            color: #2980b9 !important; /* Màu xanh dương mặc định, !important để ưu tiên */
+            color: #2980b9 !important; 
             border-bottom: 2px solid #2980b9;
             padding-bottom: 5px; margin-top: 40px; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font hiện đại hơn */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
         }
         /* Tiêu đề nhỏ hơn (st.subheader - h3) */
         h3 { 
-            color: #34495e !important; /* Màu xám đậm mặc định, !important */
+            color: #34495e !important; 
             margin-top: 30px; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        /* Sidebar */
-        div[data-testid="stSidebar"] > div:first-child { /* Target sidebar tổng quát hơn */
+        div[data-testid="stSidebar"] > div:first-child { 
             background-color: #f8f9fa; 
         }
-        /* Nút bấm */
         .stButton>button { 
-            border-radius: 25px; /* Bo tròn hơn nữa */
-            border: 2px solid #3498db; /* Màu border mới */
-            color: #3498db;
-            font-weight: bold;
-            padding: 8px 18px; /* Tăng padding */
-            transition: all 0.3s ease-in-out; 
+            border-radius: 25px; border: 2px solid #3498db; color: #3498db;
+            font-weight: bold; padding: 8px 18px; transition: all 0.3s ease-in-out; 
         }
         .stButton>button:hover { 
-            background-color: #3498db; 
-            color: white; 
-            border-color: #2980b9;
-            transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+            background-color: #3498db; color: white; border-color: #2980b9;
+            transform: scale(1.05); 
         }
-        /* Metric cards */
         .stMetric { 
-            background-color: #ffffff; 
-            border-left: 7px solid #1abc9c; /* Đường kẻ trái dày hơn */
-            padding: 20px; 
-            border-radius: 10px; 
+            background-color: #ffffff; border-left: 7px solid #1abc9c; 
+            padding: 20px; border-radius: 10px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.12); 
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
         }
@@ -142,32 +137,22 @@ def load_custom_css():
             transform: translateY(-5px); 
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-        /* SỬA MÀU TEXT BÊN TRONG METRIC */
-        div[data-testid="stMetric"] label { /* Label của metric (ví dụ: "Tổng số Tin Tuyển Dụng") */
-            color: #555555 !important; /* Màu xám đậm cho label */
-            font-weight: 500;
+        div[data-testid="stMetric"] label { 
+            color: #555555 !important; font-weight: 500;
         }
-        div[data-testid="stMetric"] div[data-testid="stMetricValue"] { /* Giá trị của metric */
-            color: #2c3e50 !important; /* Màu đen/xanh đậm cho giá trị */
-            font-size: 2em !important; /* Có thể tăng kích thước giá trị */
-            font-weight: bold;
+        div[data-testid="stMetric"] div[data-testid="stMetricValue"] { 
+            color: #2c3e50 !important; font-size: 2em !important; font-weight: bold;
         }
-        div[data-testid="stMetric"] div[data-testid="stMetricDelta"] { /* Giá trị delta (nếu có) */
+        div[data-testid="stMetric"] div[data-testid="stMetricDelta"] { 
             color: #7f8c8d !important; 
         }
-
         .stDataFrame { border-radius: 8px; overflow: hidden; }
-        
-        /* Thêm style cho các tab */
         div[data-testid="stTabs"] button[role="tab"] {
-            font-weight: 500;
-            border-radius: 8px 8px 0 0;
-            margin-right: 4px;
+            font-weight: 500; border-radius: 8px 8px 0 0; margin-right: 4px;
         }
         div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
-            background-color: #e0e0e0; /* Màu nền cho tab đang active */
+            background-color: #e0e0e0; 
         }
-
     </style>
     """, unsafe_allow_html=True)
 
@@ -190,9 +175,8 @@ else:
         df_master['job_role_group'] = df_master['job_title'].apply(categorize_job_role_st)
 
     # --- Sidebar cho Bộ lọc ---
-    st.sidebar.image("https://i.ibb.co/QFf2sWDS/Screenshot-2025-05-19-235529.png", caption="Data Analytics", use_container_width=True) 
+    st.sidebar.image("https://i.ibb.co/3ySXFK2M/496510428-2054206478392683-5625031274161836120-n.jpg", caption="Data Analytics", use_container_width=True) 
     st.sidebar.header("Bộ lọc Dữ liệu 🛠️")
-    # ... (Phần sidebar giữ nguyên) ...
     source_options = ["Tất cả"] + sorted(df_master['source_website'].unique().tolist()) if 'source_website' in df_master.columns else ["Tất cả"]
     selected_source = st.sidebar.selectbox("Nguồn Website:", source_options, help="Chọn nguồn dữ liệu bạn muốn xem.")
     location_options = ["Tất cả"] + sorted(df_master['location_primary'].dropna().unique().tolist()) if 'location_primary' in df_master.columns else ["Tất cả"]
@@ -208,6 +192,11 @@ else:
         if pd.notna(max_exp_data_val): max_exp_data = int(max_exp_data_val)
         if max_exp_data < min_exp_data : max_exp_data = min_exp_data 
     selected_exp_range = st.sidebar.slider("Số năm kinh nghiệm tối thiểu:", min_exp_data, max_exp_data, (min_exp_data, max_exp_data))
+    
+    # Checkbox để hiển thị toàn bộ dữ liệu
+    show_all_data_checkbox = st.sidebar.checkbox("Hiển thị toàn bộ dữ liệu (sau lọc)", value=False, key="show_all_data")
+
+    # Áp dụng bộ lọc
     df_filtered = df_master.copy()
     if selected_source != "Tất cả" and 'source_website' in df_filtered.columns: df_filtered = df_filtered[df_filtered['source_website'] == selected_source]
     if selected_location != "Tất cả" and 'location_primary' in df_filtered.columns: df_filtered = df_filtered[df_filtered['location_primary'] == selected_location]
@@ -216,13 +205,10 @@ else:
         df_filtered = df_filtered[(df_filtered['experience_years_min_numeric'] >= selected_exp_range[0]) & (df_filtered['experience_years_min_numeric'] <= selected_exp_range[1])]
     
     # --- Hiển thị Thông tin Tổng quan ---
-    # Sử dụng st.header() mặc định, nó sẽ lấy style từ CSS cho h2
     st.header("📈 Tổng Quan Dữ Liệu (Sau lọc)") 
-    
     if not df_filtered.empty:
         total_jobs_filtered = len(df_filtered)
         latest_update_time = "Không rõ"
-        # Giả sử file CSV được cập nhật bởi process_timestamp từ bảng master
         if 'process_timestamp' in df_filtered.columns and df_filtered['process_timestamp'].notna().any():
             try: latest_update_time = pd.to_datetime(df_filtered['process_timestamp'].max()).strftime('%H:%M:%S %d/%m/%Y')
             except: pass
@@ -231,20 +217,23 @@ else:
         avg_exp_val = df_filtered['experience_years_min_numeric'].median() if 'experience_years_min_numeric' in df_filtered.columns and df_filtered['experience_years_min_numeric'].notna().any() else "N/A"
         kpi_col2.metric(label="Kinh nghiệm TB (Median)", value=f"{avg_exp_val} năm" if avg_exp_val != "N/A" else "N/A")
         kpi_col3.metric(label="Dữ liệu cập nhật lúc", value=latest_update_time)
-        if st.sidebar.checkbox("Hiển thị dữ liệu mẫu (10 dòng đầu)", value=False, key="show_sample_data"):
-            st.subheader("🔍 Dữ liệu mẫu")
-            st.dataframe(df_filtered.head(10).reset_index(drop=True))
+        
+        if show_all_data_checkbox: # SỬA Ở ĐÂY
+            st.subheader("🔍 Toàn bộ dữ liệu (sau lọc)")
+            st.dataframe(df_filtered.reset_index(drop=True)) # Hiển thị toàn bộ df_filtered
+        elif st.sidebar.checkbox("Hiển thị dữ liệu mẫu (10 dòng đầu)", value=False, key="show_sample_data_default"): # Giữ lại lựa chọn cũ nếu muốn
+             st.subheader("🔍 Dữ liệu mẫu (10 dòng đầu)")
+             st.dataframe(df_filtered.head(10).reset_index(drop=True))
     else: st.warning("⚠️ Không có dữ liệu nào khớp với bộ lọc của bạn.")
     st.markdown("---")
 
     # --- Các Tab Phân Tích ---
     if not df_filtered.empty:
-        st.header("💡 Insights Chi Tiết") # Sử dụng st.header() mặc định
+        st.header("💡 Insights Chi Tiết") 
         tab1, tab2, tab3, tab4 = st.tabs(["🌍 Địa Điểm & Vai Trò", "🛠️ Kinh Nghiệm & Kỹ Năng", "💰 Lương & Phúc Lợi", "📅 Xu Hướng Thời Gian"])
         
-        # ... (Nội dung các tab giữ nguyên như code trước, 
-        #      đảm bảo st.pyplot và st.plotly_chart đã sử dụng use_container_width=True nếu có) ...
         with tab1:
+            # ... (Nội dung tab 1 giữ nguyên)
             col_loc, col_role = st.columns(2)
             with col_loc:
                 if 'location_primary' in df_filtered.columns:
@@ -259,6 +248,7 @@ else:
                         fig_role = px.pie(role_counts_f, values=role_counts_f.values, names=role_counts_f.index, title="<b>Tỷ lệ theo Vai trò chính</b>", hole=.4, color_discrete_sequence=px.colors.sequential.Agsunset)
                         fig_role.update_traces(textposition='inside', textinfo='percent+label'); fig_role.update_layout(title_x=0.5, font=dict(family="Arial, sans-serif")); st.plotly_chart(fig_role, use_container_width=True)
         with tab2:
+            # ... (Nội dung tab 2 giữ nguyên)
             col_exp_skill1, col_exp_skill2 = st.columns(2)
             with col_exp_skill1:
                 if 'experience_years_min_numeric' in df_filtered.columns:
@@ -285,6 +275,7 @@ else:
                         fig_skill.update_layout(yaxis={'categoryorder':'total ascending'}, title_x=0.5, font=dict(family="Arial, sans-serif")); st.plotly_chart(fig_skill, use_container_width=True)
                     else: st.write("Không có dữ liệu kỹ năng/tags.")
         with tab3:
+            # ... (Nội dung tab 3 giữ nguyên)
             if 'salary_min_vnd' in df_filtered.columns and 'salary_negotiable' in df_filtered.columns:
                 df_salary_plot_f = df_filtered[(df_filtered['salary_negotiable'] == False) & (df_filtered['salary_min_vnd'].notna())].copy()
                 if not df_salary_plot_f.empty:
@@ -312,6 +303,7 @@ else:
                     else: st.write("Không có dữ liệu phúc lợi.")
                 except Exception as e_ben: st.write(f"Lỗi khi phân tích phúc lợi: {e_ben}")
         with tab4:
+            # ... (Nội dung tab 4 giữ nguyên)
             if 'posted_year_month' in df_filtered.columns:
                 df_filtered_for_trend = df_filtered.copy() 
                 df_filtered_for_trend.loc[:, 'posted_year_month_dt'] = df_filtered_for_trend['posted_year_month'].apply(lambda x: x.to_timestamp() if pd.notna(x) else pd.NaT)
